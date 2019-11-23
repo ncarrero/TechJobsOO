@@ -11,13 +11,14 @@ namespace TechJobs.Data
          * A data store for Job objects
          */
 
+            //can use to find specific field or get all jobs in specific field
         public List<Job> Jobs { get; set; } = new List<Job>();
         public JobFieldData<Employer> Employers { get; set; } = new JobFieldData<Employer>();
         public JobFieldData<Location> Locations { get; set; } = new JobFieldData<Location>();
         public JobFieldData<PositionType> PositionTypes { get; set; } = new JobFieldData<PositionType>();
         public JobFieldData<CoreCompetency> CoreCompetencies { get; set; } = new JobFieldData<CoreCompetency>();
 
-
+        //property: can use to return all jobs
         private JobData()
         {
             JobDataImporter.LoadData(this);
@@ -39,6 +40,7 @@ namespace TechJobs.Data
          * Return all Job objects in the data store
          * with a field containing the given term
          */
+         //"search all"
         public List<Job> FindByValue(string value)
         {
             var results = from j in Jobs
@@ -57,6 +59,7 @@ namespace TechJobs.Data
          * Returns results of search the jobs data by key/value, using
          * inclusion of the search term.
          */
+         //search value in specific field
         public List<Job> FindByColumnAndValue(JobFieldType column, string value)
         {
             var results = from j in Jobs
@@ -71,6 +74,7 @@ namespace TechJobs.Data
          * for all types other than JobFieldType.All. In this case, 
          * null is returned.
          */
+        //search by type of field
         public static JobField GetFieldByType(Job job, JobFieldType type)
         {
             switch (type)
